@@ -31,14 +31,15 @@ public class PhonebookDAO {
     }
 
 
-    private void saveAll(Person[] people) {
+    private void saveAll(List<Person> people) {
         this.deleteFile();
+        people.forEach(this::save);
 
-        for (int i = 0; i < people.length; i++) {
-            if (people[i] != null) {
-                this.save(people[i]);
-            }
-        }
+//        for (int i = 0; i < people.length; i++) {
+//            if (people[i] != null) {
+//                this.save(people[i]);
+//            }
+//        }
     }
 
     private void deleteFile() {
@@ -99,38 +100,45 @@ public class PhonebookDAO {
     public Person find(Integer id) {
         var storage = this.storages.get(0);
         var people = storage.findAll();
-        for (int i = 0; i < people.size(); i++) {
-            if (people.get(i).getId().equals(id)) {
-                return people.get(i);
-            }
-        }
+        return people.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+//        for (int i = 0; i < people.size(); i++) {
+//            if (people.get(i).getId().equals(id)) {
+//                return people.get(i);
+//            }
+//        }
 
-        return null;
+
     }
 
     public void delete(int id) {
-        Person[] people = this.storages.get(0).findAll().toArray(new Person[0]);
-        for (int i = 0; i < people.length; i++) {
-            if (people[i].getId().equals(id)) {
-                people[i] = null;
-            }
-        }
+        var people = this.storages.get(0).findAll();
+        people.removeIf(person -> person.getId().equals(id));
+//        Person[] people = this.storages.get(0).findAll().toArray(new Person[0]);
+//        for (int i = 0; i < people.length; i++) {
+//            if (people[i].getId().equals(id)) {
+//                people[i] = null;
+//            }
+//        }
         this.saveAll(people);
     }
 
     public void save(Person person) {
-        for (int i = 0; i < this.storages.size(); i++) {
-            this.storages.get(i).save(person);
-        }
+        this.storages.stream().forEach(s -> s.save(person));
+
+//        for (int i = 0; i < this.storages.size(); i++) {
+//            this.storages.get(i).save(person);
+//        }
     }
 
     public void saveIndex(){
 
         var personList = this.findAll();
         var map = new HashMap<Integer, String>();
-        for(Person person : personList){
-            map.put(person.getId(), person.getLastname());
-        }
+        personList.stream().forEach(person -> map.put(person.getId(), person.getLastname()));
+
+//        for(Person person : personList){
+//            map.put(person.getId(), person.getLastname());
+//        }
         ObjectOutputStream ous = null;
         try {
             ous = new ObjectOutputStream(new FileOutputStream("./Index.txt", true));

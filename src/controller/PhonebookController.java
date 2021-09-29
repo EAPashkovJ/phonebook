@@ -60,9 +60,11 @@ public class PhonebookController implements IController {
             }
             case "list" -> {
                 List<Person> list = dao.findAll();
-                for (Person person : list) {
-                    System.out.println(person);
-                }
+                list.forEach(System.out::println);
+
+//                for (Person person : list) {
+//                    System.out.println(person);
+//                }
 
             }
             case "find_by_phone" -> {
