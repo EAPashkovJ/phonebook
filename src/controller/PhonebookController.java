@@ -8,6 +8,7 @@ import entity.Person;
 import mapper.PersonMapper;
 import marshaller.PersonMarshaller;
 import storage.FileStorage;
+import storage.PhonebookFileStorage;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class PhonebookController implements IController {
     @Override
     public void process(List<String> arguments) {
-        var storage = new FileStorage<Person>("./phonebook.txt");
+        var storage = new PhonebookFileStorage("./phonebook.json");
         storage.setMarshaller(new PersonMarshaller());
         storage.setEntityClass(Person.class);
 
