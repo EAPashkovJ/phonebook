@@ -13,7 +13,7 @@ import java.util.List;
 public class ApplicationController implements IController {
     @Override
     public void process(List<String> arguments) {
-        var storage = new FileStorage<Application>("./applications.txt");
+        var storage = new FileStorage("./applications.txt");
         storage.setEntityClass(Application.class);
         storage.setMarshaller(new ApplicationMarshaller());
 

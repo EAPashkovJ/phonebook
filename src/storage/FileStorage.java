@@ -10,22 +10,22 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-public class FileStorage<E> implements Storage<E> {
+public class FileStorage implements Storage {
     private String filePath;
     private Marshaller marshaller;
-    private Class<E> entityClass;
+    private Class entityClass;
 
     public FileStorage(String filePath) {
         this.filePath = filePath;
     }
 
     @Override
-    public Class<E> getEntityClass() {
+    public Class getEntityClass() {
         return this.entityClass;
     }
 
     @Override
-    public void setEntityClass(Class<E> clazz) {
+    public void setEntityClass(Class clazz) {
         this.entityClass = clazz;
     }
 
