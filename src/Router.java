@@ -3,6 +3,7 @@ import controller.ApplicationController;
 import controller.IController;
 import controller.PhonebookController;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Router {
@@ -12,7 +13,7 @@ public class Router {
         this.arguments = arguments;
     }
 
-    public void dispatch() {
+    public void dispatch() throws IOException {
         IController controller;
         var action = this.arguments[0];
         if (action.startsWith("application/")) {

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PhonebookController implements IController {
     @Override
-    public void process(List<String> arguments) {
+    public Object process(List<String> arguments) {
         var storage = new PhonebookFileStorage("./phonebook.json");
         storage.setMarshaller(new PersonMarshaller());
         storage.setEntityClass(Person.class);
@@ -40,6 +40,7 @@ public class PhonebookController implements IController {
             case "save" -> {
                 var mapper = new PersonMapper();
                 dao.save(mapper.toEntity(arguments));
+                return true;
             }
             case "call" -> {
                 var currentTime = System.currentTimeMillis();
@@ -73,5 +74,6 @@ public class PhonebookController implements IController {
                 personList.forEach(System.out::println);
             }
         }
+        return null;
     }
 }
