@@ -1,3 +1,5 @@
+import reportWriter.Reporter;
+
 import java.io.IOException;
 
 // http://test.com/path/to/resource
@@ -6,5 +8,9 @@ public class Application {
     public static void main(String[] args) throws IOException {
         var router = new Router(args);
         router.dispatch();
+
+        var reporter = new Reporter();
+        reporter.start();
+
     }
 }
