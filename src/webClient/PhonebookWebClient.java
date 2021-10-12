@@ -15,7 +15,7 @@ public class PhonebookWebClient {
         String list = "";
         ObjectMapper mapper = new ObjectMapper();
         try {
-             list = mapper.writeValueAsString(List.of("generate", "vasia", "pupkin", "12", "12", "Minsk"));
+             list = mapper.writeValueAsString(List.of("call", "pupkin"));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

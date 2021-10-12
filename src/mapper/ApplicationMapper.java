@@ -15,7 +15,6 @@ public class ApplicationMapper {
 
     public Application toUpdateEntity(List<String> args) {
         var application = new Application();
-        application.setId(Integer.parseInt(args.get(ID)));
         application.setFirstname(args.get(FIRSTNAME_INDEX));
         application.setLastname(args.get(LASTNAME_INDEX));
         application.setAge(Integer.parseInt(args.get(AGE_INDEX)));

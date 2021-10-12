@@ -1,7 +1,10 @@
 package controller;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface IController {
-    Object process(List<String> arguments);
+    void setDatabaseConnection(Connection connection);
+
+    void process(List<String> arguments);
 }

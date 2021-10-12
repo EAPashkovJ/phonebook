@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class FileWriter {
+public class ReportWriter {
 
     public void write(List<String> list) throws IOException {
         java.io.FileWriter writer = new java.io.FileWriter("./report.txt");

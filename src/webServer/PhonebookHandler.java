@@ -26,10 +26,10 @@ public class PhonebookHandler implements HttpHandler {
 //        list.add("20");
 //        list.add("2020");
 //        list.add("Minsk");
-        var responseEntity = phonebookController.process(args);
+
 
         var output = new ByteArrayOutputStream();
-        mapper.writeValue(output, responseEntity);
+        mapper.writeValue(output, null);
 
         System.out.println("Handling: " + t.getRequestURI());
 

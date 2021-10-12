@@ -7,17 +7,21 @@ import mapper.ApplicationMapper;
 import marshaller.ApplicationMarshaller;
 import storage.FileStorage;
 
+import java.sql.Connection;
 import java.util.Collections;
 import java.util.List;
 
 public class ApplicationController implements IController {
-    @Override
-    public Object process(List<String> arguments) {
-        var storage = new FileStorage("./applications.txt");
-        storage.setEntityClass(Application.class);
-        storage.setMarshaller(new ApplicationMarshaller());
+    private Connection connection;
 
-        var dao = new ApplicationDAO(Collections.singletonList(storage));
+    @Override
+    public void setDatabaseConnection(Connection connection) {
+        this.connection = connection;
+    }
+    @Override
+
+    public void process(List<String> arguments) {
+        var dao = new ApplicationDAO(this.connection);
         switch (arguments.get(0).replace("application/", "")) {
             case "generate" -> {
                 var mapper = new ApplicationMapper();
@@ -65,6 +69,6 @@ public class ApplicationController implements IController {
             case "done" -> {
             }
         }
-        return null;
+
     }
 }

@@ -12,7 +12,7 @@ public class Reporter extends Thread {
         ArrayList<String> list = new ArrayList<>();
         var fileScanner = new FileScanner();
         list = fileScanner.getFile(file, list);
-        var writer = new FileWriter();
+        var writer = new ReportWriter();
         try {
             writer.write(list);
         } catch (IOException exception) {

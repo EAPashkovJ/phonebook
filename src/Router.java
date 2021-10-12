@@ -4,16 +4,29 @@ import controller.IController;
 import controller.PhonebookController;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Arrays;
 
 public class Router {
     private String[] arguments;
+    private Connection connection;
+
+    public Router() {
+    }
 
     public Router(String[] arguments) {
         this.arguments = arguments;
     }
 
-    public void dispatch() throws IOException {
+    public void setArguments(String[] arguments) {
+        this.arguments = arguments;
+    }
+
+    public void setDatabaseConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public IController getController() {
         IController controller;
         var action = this.arguments[0];
         if (action.startsWith("application/")) {
@@ -23,6 +36,11 @@ public class Router {
         } else {
             throw new IllegalArgumentException("Wrong action: " + action);
         }
-        controller.process(Arrays.asList(this.arguments));
+        controller.setDatabaseConnection(connection);
+        return controller;
+    }
+
+    public void dispatch() {
+        getController().process(Arrays.asList(this.arguments));
     }
 }
