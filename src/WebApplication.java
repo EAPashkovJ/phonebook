@@ -1,3 +1,5 @@
+import webServer.SaveHandler;
+import webServer.IndexHandler;
 import webServer.PhonebookHandler;
 import com.sun.net.httpserver.HttpServer;
 
@@ -10,6 +12,8 @@ public class WebApplication {
         try {
             server = HttpServer.create(new InetSocketAddress(8000), 0);
             server.createContext("/phonebook", new PhonebookHandler());
+            server.createContext("/save" , new SaveHandler());
+            server.createContext("/", new IndexHandler());
         } catch (IOException exception) {
             exception.printStackTrace();
         }

@@ -123,7 +123,7 @@ public class PhonebookDAO {
 
     public Person findByLastname(String lastname) {
         try {
-            var stmt = connection.prepareStatement("SELECT * FROM Phonebook WHERE lastname LIKE CONCAT('%', ?, '%')");
+            var stmt = connection.prepareStatement("SELECT * FROM phonebook.phonebook WHERE lastname LIKE CONCAT('%', ?, '%')");
             stmt.setString(1, lastname);
 
             var rs = stmt.executeQuery();
@@ -145,7 +145,7 @@ public class PhonebookDAO {
 
     public List<Person> findAll() {
         try {
-            var stmt = connection.prepareStatement("SELECT * FROM phonebook");
+            var stmt = connection.prepareStatement("SELECT * FROM phonebook.phonebook");
 
             var people = new ArrayList<Person>();
             var rs = stmt.executeQuery();
@@ -168,7 +168,7 @@ public class PhonebookDAO {
 
     public Person find(Integer id) {
         try {
-            var stmt = connection.prepareStatement("SELECT * FROM Phonebook WHERE id = ?");
+            var stmt = connection.prepareStatement("SELECT * FROM phonebook.phonebook WHERE id = ?");
             stmt.setInt(1, id);
 
             var rs = stmt.executeQuery();
@@ -190,7 +190,7 @@ public class PhonebookDAO {
 
     public void delete(int id) {
         try {
-            var stmt = connection.prepareStatement("DELETE FROM Phonebook WHERE Id = ?");
+            var stmt = connection.prepareStatement("DELETE FROM phonebook.phonebook WHERE Id = ?");
             stmt.setInt(1, id);
             stmt.execute();
         } catch (SQLException throwables) {
@@ -202,7 +202,7 @@ public class PhonebookDAO {
         try {
             if (person.getId() != null) {
                 var stmt = this.connection.prepareStatement(
-                        "UPDATE phonebook SET age = ?, firstname = ?, lastname = ?, address = ?, phone_number = ? WHERE id = ?"
+                        "UPDATE phonebook.phonebook SET age = ?, firstname = ?, lastname = ?, address = ?, phone_number = ? WHERE id = ?"
                 );
                 stmt.setInt(1, person.getAge());
                 stmt.setString(2, person.getFirstname());
@@ -213,7 +213,7 @@ public class PhonebookDAO {
                 stmt.execute();
             } else {
                 var stmt = this.connection.prepareStatement(
-                        "INSERT INTO phonebook (age, firstname, lastname, address, phone_number) VALUES (?, ?, ?, ?, ?)"
+                        "INSERT INTO phonebook.phonebook (age, firstname, lastname, address, phone_number) VALUES (?, ?, ?, ?, ?)"
                 );
                 stmt.setInt(1, person.getAge());
                 stmt.setString(2, person.getFirstname());
