@@ -10,36 +10,41 @@ import marshaller.PersonMarshaller;
 import storage.FileStorage;
 import storage.PhonebookFileStorage;
 
+import java.sql.Connection;
 import java.util.Collections;
 import java.util.List;
 
 public class PhonebookController implements IController {
+    private Connection connection;
+
+    @Override
+    public void setDatabaseConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void process(List<String> arguments) {
-        var storage = new PhonebookFileStorage("./phonebook.json");
-        storage.setMarshaller(new PersonMarshaller());
-        storage.setEntityClass(Person.class);
-
-        var dao = new PhonebookDAO(Collections.singletonList(storage));
+        var dao = new PhonebookDAO(connection);
         switch (arguments.get(0).replace("phonebook/", "")) {
-            case "getIndex" -> {
-                var currentTime = System.currentTimeMillis();
-                System.out.println(dao.findByIndex(Integer.parseInt(arguments.get(1))));
-                System.out.println(System.currentTimeMillis() - currentTime);
-
-            }
-            case "index" -> {
-                dao.saveIndex();
-            }
+//            case "getIndex" -> {
+//                var currentTime = System.currentTimeMillis();
+//                System.out.println(dao.findByIndex(Integer.parseInt(arguments.get(1))));
+//                System.out.println(System.currentTimeMillis() - currentTime);
+//
+//            }
+//            case "index" -> {
+//                dao.saveIndex();
+//            }
             case "generate" -> {
                 var mapper = new PersonMapper();
                 for (int i = 0; i < 150; i++) {
-                    dao.save(mapper.toEntity2(arguments));
+                    dao.save(mapper.toEntity(arguments));
                 }
             }
             case "save" -> {
                 var mapper = new PersonMapper();
                 dao.save(mapper.toEntity(arguments));
+
             }
             case "call" -> {
                 var currentTime = System.currentTimeMillis();
@@ -63,15 +68,13 @@ public class PhonebookController implements IController {
                 List<Person> list = dao.findAll();
                 list.forEach(System.out::println);
 
-//                for (Person person : list) {
-//                    System.out.println(person);
-//                }
 
             }
-            case "find_by_phone" -> {
-                var personList = dao.findBy(person -> person.getPhoneNumber().startsWith(arguments.get(1)));
-                personList.forEach(System.out::println);
-            }
+//            case "find_by_phone" -> {
+//                var personList = dao.findBy(person -> person.getPhoneNumber().startsWith(arguments.get(1)));
+//                personList.forEach(System.out::println);
+//            }
         }
+
     }
 }

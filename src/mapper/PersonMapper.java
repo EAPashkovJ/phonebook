@@ -15,7 +15,7 @@ public class PersonMapper {
     private static final Integer ADDRESS_INDEX = 5;
 
     public Person toEntity(List<String> args) {
-        var person = new Person(new Random().nextInt(100_000));
+        var person = new Person();
         person.setFirstname(args.get(FIRSTNAME_INDEX));
         person.setLastname(args.get(LASTNAME_INDEX));
         person.setAge(Integer.parseInt(args.get(AGE_INDEX)));
