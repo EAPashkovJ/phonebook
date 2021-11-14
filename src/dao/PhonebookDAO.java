@@ -3,16 +3,12 @@ package dao;
 
 
 import entity.Person;
-import storage.Storage;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class PhonebookDAO {
     private final Connection connection;
@@ -213,7 +209,7 @@ public class PhonebookDAO {
                 stmt.execute();
             } else {
                 var stmt = this.connection.prepareStatement(
-                        "INSERT INTO phonebook.phonebook (age, firstname, lastname, address, phone_number) VALUES (?, ?, ?, ?, ?)"
+                        "INSERT INTO phonebook.phonebook (age, firstname, lastname, address, Phone_number) VALUES (?, ?, ?, ?, ?)"
                 );
                 stmt.setInt(1, person.getAge());
                 stmt.setString(2, person.getFirstname());

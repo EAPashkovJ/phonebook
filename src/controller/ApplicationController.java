@@ -18,6 +18,7 @@ public class ApplicationController implements IController {
     public void setDatabaseConnection(Connection connection) {
         this.connection = connection;
     }
+
     @Override
 
     public void process(List<String> arguments) {

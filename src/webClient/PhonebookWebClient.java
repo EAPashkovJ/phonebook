@@ -24,7 +24,7 @@ public class PhonebookWebClient {
                 .build();
 
         var request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8000/phonebook"))
+                .uri(URI.create("http://localhost:8800/phonebook"))
                 .POST(HttpRequest.BodyPublishers.ofString(list))
                 .build();
 

@@ -8,8 +8,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-// http://test.com/path/to/resource
-// http://test.com/application/save
 public class Application {
     private static Connection getConnection() {
         try {

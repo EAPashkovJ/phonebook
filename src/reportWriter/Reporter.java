@@ -8,7 +8,7 @@ public class Reporter extends Thread {
 
     @Override
     public void run() {
-        File file = new File(".\\out");
+        File file = new File("/Users/evgeniipashkov/IdeaProjects/Phonebook/out");
         ArrayList<String> list = new ArrayList<>();
         var fileScanner = new FileScanner();
         list = fileScanner.getFile(file, list);

@@ -22,7 +22,7 @@ public class ApplicationDAO {
         try {
             var applications = new ArrayList<Application>();
             var stmt = this.connection.createStatement();
-            var rs = stmt.executeQuery("SELECT * FROM Application");
+            var rs = stmt.executeQuery("SELECT * FROM phonebook.application");
             while (rs.next()) {
                 var application = new Application();
                 application.setId(rs.getInt("id"));
